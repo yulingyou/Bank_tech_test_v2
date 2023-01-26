@@ -4,8 +4,12 @@
 
 ## Installation
 1. Clone this repo ```git@github.com:yulingyou/Bank_tech_test_v2.git```
-2. Language: Ruby
-3. Test: RSpec, run 'rspec' to test
+2. Run ```bundle install```
+
+## Technologies
+1. Language: ruby
+2. Test: RSpec, run 'rspec' to test
+3. Gem 'simplecov' - check the coverage of tests
 
 ## Specification
 ### Requirements
@@ -48,4 +52,9 @@ date || credit || debit || balance
 26-01-2023 ||  || 500.00 || 2500.00
  => [#<Bank_statement:0x0000000152a636e8 @date="26-01-2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000152b13908 @date="26-01-2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000152a244c0 @date="26-01-2023", @balance="2500.00", @debit="500.00">] 
 3.0.0 :006 > exit
+```
+
+## Test Coverage
+```
+Coverage report generated for RSpec to /Users/daisy/Projects/week9/Bank_tech_test_v2/coverage. 99 / 99 LOC (100.0%) covered.
 ```
