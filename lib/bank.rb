@@ -22,6 +22,17 @@ class Bank
   def balance
     @balance
   end
+
+  def printing_final_statement
+    @printer.printing_bank_statement
+  end
+
+  def create_bank_statement(date, credit, debit, balance)
+    bank_statement = @bank_statement.new(date, credit, debit, balance)
+    @printer.add_bank_statement(bank_statement)
+  end
+
+  
   private
 
   def update_balance(date: nil,credit: nil, debit: nil)
@@ -30,13 +41,4 @@ class Bank
     create_bank_statement(date, credit, debit, @balance)
   end
 
-
-  def create_bank_statement(date, credit, debit, balance)
-    bank_statement = @bank_statement.new(date, credit, debit, balance)
-    @printer.add_bank_statement(bank_statement)
-  end
-
-  def printing_final_statement
-    @printer.printing_bank_statement
-  end
 end

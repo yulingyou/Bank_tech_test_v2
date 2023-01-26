@@ -22,4 +22,10 @@ RSpec.describe Bank do
     expect(bank.balance).to eq(2500)
   end
 
+  it "should printing correct bank statement with one bank statement(transaction) " do
+    bank = Bank.new
+    bank.create_bank_statement('10/01/2023',nil,1000, 1000)
+    expect{bank.printing_final_statement}.to output("date || credit || debit || balance \n10/01/2023 ||  || 1000.00 || 1000.00\n").to_stdout
+   
+  end
 end
