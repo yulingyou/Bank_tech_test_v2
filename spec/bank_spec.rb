@@ -21,4 +21,5 @@ RSpec.describe Bank do
     bank.withdraw(500)
     expect(bank.balance).to eq(2500)
   end
+
 end

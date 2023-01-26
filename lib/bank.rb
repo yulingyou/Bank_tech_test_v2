@@ -1,24 +1,42 @@
+require './lib/printer.rb'
+require './lib/bank_statement.rb'
+
 class Bank
   def initialize
-    @date = Time.now
     @balance = 0
+    @printer = Printer.new
+    @bank_statement = Bank_statement
+    
   end
 
   def deposit(credit)
-    update_balance(credit: credit)
+    date = Time.now.strftime('%d-%m-%Y')
+    update_balance(date: date,credit: credit)
   end
 
   def withdraw(debit)
-    update_balance(debit: debit)
-  end
-
-  def update_balance(credit: nil, debit: nil)
-    @balance += credit if credit
-    @balance -= debit if debit
+    date = Time.now.strftime('%d-%m-%Y')
+    update_balance(date: date,debit: debit)
   end
 
   def balance
     @balance
   end
+  private
 
+  def update_balance(date: nil,credit: nil, debit: nil)
+    @balance += credit if credit
+    @balance -= debit if debit
+    create_bank_statement(date, credit, debit, @balance)
+  end
+
+
+  def create_bank_statement(date, credit, debit, balance)
+    bank_statement = @bank_statement.new(date, credit, debit, balance)
+    @printer.add_bank_statement(bank_statement)
+  end
+
+  def printing_final_statement
+    @printer.printing_bank_statement
+  end
 end
