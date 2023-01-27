@@ -10,12 +10,12 @@ class Bank
   end
 
   def deposit(credit)
-    date = Time.now.strftime('%d-%m-%Y')
+    date = Time.now
     update_balance(date: date,credit: credit)
   end
 
   def withdraw(debit)
-    date = Time.now.strftime('%d-%m-%Y')
+    date = Time.now
     update_balance(date: date,debit: debit)
   end
 

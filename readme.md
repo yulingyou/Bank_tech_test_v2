@@ -37,38 +37,40 @@ date || credit || debit || balance
 ## Result
 1. Same day transaction
 ```
-irb -r ./lib/bank.rb
+> irb -r ./lib/bank.rb
 3.0.0 :001 > bank = Bank.new
- => #<Bank:0x0000000152b18b38 @balance=0, @printer=#<Printer:0x0000000152b18ae8 @bank_statements=[]>, @bank_statement=Bank_statement> 
+ => #<Bank:0x000000012e92bec0 @balance=0, @printer=#<Printer:0x000000012e92b2e0 @bank_statements=[]>, @bank_statement=Ba... 
 3.0.0 :002 > bank.deposit(1000)
- => [#<Bank_statement:0x0000000152a636e8 @date="26-01-2023", @credit="1000.00", @balance="1000.00">] 
-3.0.0 :003 > bank.deposit(2000)                                 @credit="2000.00", @balance="3000.00">] 
+ => [#<Bank_statement:0x000000012fa15380 @date=2023-01-27 10:39:55.165997 +0000, @credit="1000.00", @balance="1000.00">] 
+3.0.0 :003 > bank.deposit(2000)
+ => [#<Bank_statement:0x000000012fa15380 @date=2023-01-27 10:39:55.165997 +0000, @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x000000012f944140 @date=2023-01-27 10:40:00.848746 +0000, @credit="2000.00", @balance="3000.00">] 
 3.0.0 :004 > bank.withdraw(500)
- => [#<Bank_statement:0x0000000152a636e8 @date="26-01-2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000152b13908 @date="26-01-2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000152a244c0 @date="26-01-2023", @balance="2500.00", @debit="500.00">] 
+ => [#<Bank_statement:0x000000012fa15380 @date=2023-01-27 10:39:55.165997 +0000, @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x000000012f944140 @date=2023-01-27 10:40:00.848746 +0000, @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x000000012f9f4e00 @date=2023-01-27 10:40:06.787529 +0000, @balance="2500.00", @debit="500.00">] 
 3.0.0 :005 > bank.printing_final_statement
 date || credit || debit || balance 
-26-01-2023 || 1000.00 ||  || 1000.00
-26-01-2023 || 2000.00 ||  || 3000.00
-26-01-2023 ||  || 500.00 || 2500.00
- => [#<Bank_statement:0x0000000152a636e8 @date="26-01-2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000152b13908 @date="26-01-2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000152a244c0 @date="26-01-2023", @balance="2500.00", @debit="500.00">] 
-3.0.0 :006 > exit
+27/01/2023 ||  || 500.00 || 2500.00
+27/01/2023 || 2000.00 ||  || 3000.00
+27/01/2023 || 1000.00 ||  || 1000.00
+ => [#<Bank_statement:0x000000012f9f4e00 @date=2023-01-27 10:40:06.787529 +0000, @balance="2500.00", @debit="500.00">, #<Bank_statement:0x000000012f944140 @date=2023-01-27 10:40:00.848746 +0000, @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x000000012fa15380 @date=2023-01-27 10:39:55.165997 +0000, @credit="1000.00", @balance="1000.00">] 
 ```
 
 2. Different day transaction
 ```
- => #<Bank:0x0000000124c58828 @balance=0, @printer=#<Printer:0x0000000124c587d8 @bank_statements=[]>, @bank_statement=Ba... 
-3.0.0 :002 > bank.create_bank_statement('10/01/2023',1000,nil, 1000)
- => [#<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">] 
-3.0.0 :003 > bank.create_bank_statement('13/01/2023',2000,nil, 3000)
- => [#<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000124b893c0 @date="13/01/2023", @credit="2000.00", @balance="3000.00">] 
-3.0.0 :004 > bank.create_bank_statement('14/01/2023',nil,500, 2500)
- => [#<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000124b893c0 @date="13/01/2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000124c42aa0 @date="14/01/2023", @balance="2500.00", @debit="500.00">] 
+> irb -r ./lib/bank.rb
+3.0.0 :001 > bank = Bank.new
+ => #<Bank:0x00000001363f1768 @balance=0, @printer=#<Printer:0x00000001363f1718 @bank_statements=[]>, @bank_statement=Ba... 
+3.0.0 :002 > bank.create_bank_statement(Time.new(2023, 1, 10),1000,nil, 1000)
+ => [#<Bank_statement:0x000000013633a590 @date=2023-01-10 00:00:00 +0000, @credit="1000.00", @balance="1000.00">] 
+3.0.0 :003 > bank.create_bank_statement(Time.new(2023, 1, 13),2000,nil, 3000)
+ => [#<Bank_statement:0x000000013633a590 @date=2023-01-10 00:00:00 +0000, @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x00000001361d8468 @date=2023-01-13 00:00:00 +0000, @credit="2000.00", @balance="3000.00">] 
+3.0.0 :004 > bank.create_bank_statement(Time.new(2023, 1, 14),nil,500, 2500)
+ => [#<Bank_statement:0x000000013633a590 @date=2023-01-10 00:00:00 +0000, @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x00000001361d8468 @date=2023-01-13 00:00:00 +0000, @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x000000013637b450 @date=2023-01-14 00:00:00 +0000, @balance="2500.00", @debit="500.00">] 
 3.0.0 :005 > bank.printing_final_statement
 date || credit || debit || balance 
 14/01/2023 ||  || 500.00 || 2500.00
 13/01/2023 || 2000.00 ||  || 3000.00
 10/01/2023 || 1000.00 ||  || 1000.00
- => [#<Bank_statement:0x0000000124c42aa0 @date="14/01/2023", @balance="2500.00", @debit="500.00">, #<Bank_statement:0x0000000124b893c0 @date="13/01/2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">]
+ => [#<Bank_statement:0x000000013637b450 @date=2023-01-14 00:00:00 +0000, @balance="2500.00", @debit="500.00">, #<Bank_statement:0x00000001361d8468 @date=2023-01-13 00:00:00 +0000, @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x000000013633a590 @date=2023-01-10 00:00:00 +0000, @credit="1000.00", @balance="1000.00">] 
  ```
 
 ## Test Coverage
