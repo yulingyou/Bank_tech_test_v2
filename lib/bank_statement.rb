@@ -1,4 +1,4 @@
-class Bank_statement 
+class BankStatement 
   attr_accessor :date, :credit, :debit, :balance
 
   def initialize(date, credit, debit ,balance) 

@@ -5,7 +5,7 @@ class Bank
   def initialize
     @balance = 0
     @printer = Printer.new
-    @bank_statement = Bank_statement
+    @bank_statement = BankStatement
     
   end
 
