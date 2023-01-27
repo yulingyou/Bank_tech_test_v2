@@ -7,9 +7,9 @@
 2. Run ```bundle install```
 
 ## Technologies
-1. Language: ruby
+1. Language: ruby 3.0.0
 2. Test: RSpec, run 'rspec' to test
-3. Gem 'simplecov' - check the coverage of tests
+3. Gem 'simplecov', check the coverage of tests
 
 ## Specification
 ### Requirements
@@ -35,7 +35,7 @@ date || credit || debit || balance
 ```
 
 ## Result
-
+1. Same day transaction
 ```
 irb -r ./lib/bank.rb
 3.0.0 :001 > bank = Bank.new
@@ -53,6 +53,23 @@ date || credit || debit || balance
  => [#<Bank_statement:0x0000000152a636e8 @date="26-01-2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000152b13908 @date="26-01-2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000152a244c0 @date="26-01-2023", @balance="2500.00", @debit="500.00">] 
 3.0.0 :006 > exit
 ```
+
+2. Different day transaction
+```
+ => #<Bank:0x0000000124c58828 @balance=0, @printer=#<Printer:0x0000000124c587d8 @bank_statements=[]>, @bank_statement=Ba... 
+3.0.0 :002 > bank.create_bank_statement('10/01/2023',1000,nil, 1000)
+ => [#<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">] 
+3.0.0 :003 > bank.create_bank_statement('13/01/2023',2000,nil, 3000)
+ => [#<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000124b893c0 @date="13/01/2023", @credit="2000.00", @balance="3000.00">] 
+3.0.0 :004 > bank.create_bank_statement('14/01/2023',nil,500, 2500)
+ => [#<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">, #<Bank_statement:0x0000000124b893c0 @date="13/01/2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000124c42aa0 @date="14/01/2023", @balance="2500.00", @debit="500.00">] 
+3.0.0 :005 > bank.printing_final_statement
+date || credit || debit || balance 
+14/01/2023 ||  || 500.00 || 2500.00
+13/01/2023 || 2000.00 ||  || 3000.00
+10/01/2023 || 1000.00 ||  || 1000.00
+ => [#<Bank_statement:0x0000000124c42aa0 @date="14/01/2023", @balance="2500.00", @debit="500.00">, #<Bank_statement:0x0000000124b893c0 @date="13/01/2023", @credit="2000.00", @balance="3000.00">, #<Bank_statement:0x0000000124b331a0 @date="10/01/2023", @credit="1000.00", @balance="1000.00">]
+ ```
 
 ## Test Coverage
 ```
